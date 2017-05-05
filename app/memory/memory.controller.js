@@ -28,7 +28,6 @@
     };
 
     self.selectMemory = function (index) {
-      console.log(index);
       if (self.memory[index].showed) {
         console.log('already choose');
       }

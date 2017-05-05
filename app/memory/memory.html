@@ -5,14 +5,16 @@
     </button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-    <div class="row" ng-repeat="row in MemoryCtrl.range(MemoryCtrl.memory.length)" ng-if="$index % 4==0">
-      <div ng-repeat="line in MemoryCtrl.range('4')">
+    <div class="row" ng-repeat="row in MemoryCtrl.range(MemoryCtrl.memory.length)" ng-if="$index % 3==0">
+      <div ng-repeat="line in MemoryCtrl.range('3')">
         <div class="element" data-ng-if="MemoryCtrl.memory.length > (row+line)">
-          <img data-ng-if="!MemoryCtrl.memory[row+line].showed" height="150px"
+          <img data-ng-if="!MemoryCtrl.memory[row+line].showed"
+               class="image-list-thumb" width="100%" height="auto"
                ng-src="{{MemoryCtrl.categories[MemoryCtrl.gameType][MemoryCtrl.gameFilter].gameImg}}"
                alt="Image" data-ng-click="MemoryCtrl.selectMemory(row+line)"/>
           <div data-ng-if="MemoryCtrl.memory[row+line].showed">
-            <img data-ng-if="MemoryCtrl.isImage" height="150px"
+            <img data-ng-if="MemoryCtrl.isImage"
+                 class="image-list-thumb" width="100%" height="auto"
                  ng-src="{{MemoryCtrl.folder+MemoryCtrl.memory[row+line].character}}"
                  alt="Image"/>
             <div ng-class="MemoryCtrl.memory[row+line].class"
