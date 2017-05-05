@@ -5,19 +5,25 @@
     </button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-    <div class="col-xs-3" data-ng-repeat="color in MemoryCtrl.memory track by $index">
-      <img data-ng-if="!color.showed" height="150px"
-           ng-src="{{MemoryCtrl.categories[MemoryCtrl.gameType][MemoryCtrl.gameFilter].gameImg}}"
-           alt="Image" data-ng-click="MemoryCtrl.selectMemory($index)"/>
-      <div data-ng-if="color.showed">
-        <img data-ng-if="MemoryCtrl.isImage" height="150px"
-             ng-src="{{MemoryCtrl.folder+color.character}}"
-             alt="Image" data-ng-click="MemoryCtrl.selectMemory($index)"/>
-        <div ng-class="color.class"
-             ng-style="{background : color.colorName}"
-             data-ng-if="!MemoryCtrl.isImage">
+    <div class="row" ng-repeat="row in MemoryCtrl.range(MemoryCtrl.memory.length)" ng-if="$index % 4==0">
+      <div ng-repeat="line in MemoryCtrl.range('4')">
+        <div class="element" data-ng-if="MemoryCtrl.memory.length > (row+line)">
+          <img data-ng-if="!MemoryCtrl.memory[row+line].showed" height="150px"
+               ng-src="{{MemoryCtrl.categories[MemoryCtrl.gameType][MemoryCtrl.gameFilter].gameImg}}"
+               alt="Image" data-ng-click="MemoryCtrl.selectMemory(row+line)"/>
+          <div data-ng-if="MemoryCtrl.memory[row+line].showed">
+            <img data-ng-if="MemoryCtrl.isImage" height="150px"
+                 ng-src="{{MemoryCtrl.folder+MemoryCtrl.memory[row+line].character}}"
+                 alt="Image"/>
+            <div ng-class="MemoryCtrl.memory[row+line].class"
+                 ng-style="{background : MemoryCtrl.memory[row+line].colorName}"
+                 data-ng-if="!MemoryCtrl.isImage">
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    </div>
+
   </ion-content>
 </ion-view>

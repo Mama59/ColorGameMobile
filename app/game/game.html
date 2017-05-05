@@ -5,11 +5,11 @@
       <div data-ng-repeat="(type, category) in GameCtrl.categories">
         <h2 data-ng-bind="type"></h2>
         <h3>
-          <div data-ng-repeat="(key, value) in category">
+          <ion-item data-ng-repeat="(key, value) in category">
             <a ui-sref="{{game.link}}({gameFilter : key, gameType : type})">
               {{key}}
             </a>
-          </div>
+          </ion-item>
         </h3>
       </div>
     </div>

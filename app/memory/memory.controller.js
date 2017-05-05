@@ -28,6 +28,7 @@
     };
 
     self.selectMemory = function (index) {
+      console.log(index);
       if (self.memory[index].showed) {
         console.log('already choose');
       }
@@ -55,6 +56,14 @@
           self.memorySelected.showed = true;
         }
       }
+    };
+
+    self.range = function(count){
+      var ratings = [];
+      for (var i = 0; i < count; i++) {
+        ratings.push(i)
+      }
+      return ratings;
     };
 
     self.isImg = function () {
