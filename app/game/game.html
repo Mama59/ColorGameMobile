@@ -5,14 +5,13 @@
       <div data-ng-repeat="(type, category) in GameCtrl.categories">
         <h2 data-ng-bind="type"></h2>
         <h3>
-          <ion-item data-ng-repeat="(key, value) in category">
+          <div data-ng-repeat="(key, value) in category">
             <a ui-sref="{{game.link}}({gameFilter : key, gameType : type})">
               {{key}}
             </a>
-          </ion-item>
+          </div>
         </h3>
       </div>
     </div>
   </ion-content>
 </ion-view>
-git remote add origin git@github.com:Mama59/ColorGameMobile.git

@@ -2,10 +2,44 @@
   angular
     .module('game')
     .service('GameService', gameService);
-
-  function gameService() {
+  gameService.$inject = ['$cordovaNativeAudio'];
+  function gameService($cordovaNativeAudio) {
     let self = this;
     self.audioFile = "/audio/";
+
+    function loadSound(name, link)
+    {
+      if($cordovaNativeAudio) {
+
+        $cordovaNativeAudio
+          .preloadSimple(name, link)
+          .then(function (msg) {
+          }, function (error) {
+            alert(error);
+          });
+
+        self.isSoundLoaded = true;
+        playNativeSound('mySound');
+      }
+    }
+
+    self.playSound = function(name, link)
+    {
+      if(self.isSoundLoaded)
+      {
+        playNativeSound(name);
+      }
+      else
+      {
+        loadSound(name, link);
+      }
+    };
+
+    function playNativeSound(name){
+      if($cordovaNativeAudio) {
+        $cordovaNativeAudio.play(name);
+      }
+    }
 
     self.getAudio = function () {
       var audio = {
@@ -15,7 +49,7 @@
 
       for (var file in audio) {
         if (audio[file].fileName) {
-          audio[file].audio = new Audio(self.audioFile + audio[file].fileName);
+          loadSound(audio[file].fileName, self.audioFile + audio[file].fileName);
         }
       }
       return audio;
@@ -64,12 +98,6 @@
       }
 
       return array;
-    };
-
-    self.playSound = function (object) {
-      if (object && object.audio) {
-        object.audio.play();
-      }
     };
 
     function randomElement(array) {
@@ -136,9 +164,9 @@
             viceVersa: 'degout.jpeg'
           },
           {
-            name: 'gris',
-            nameEn: 'grey',
-            colorName: 'grey',
+            name: 'blanc',
+            nameEn: 'white',
+            colorName: 'white',
             fileName: 'grisFr.mp3',
             fileNameEn: 'grey.mp3',
             pawPatrol: 'everest.jpg'

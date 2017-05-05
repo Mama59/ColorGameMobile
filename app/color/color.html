@@ -5,34 +5,32 @@
     </button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-      <div align="center" class="col-xs-12" data-ng-if="ColorCtrl.isImage">
-        <img data-ng-click="ColorCtrl.playSound()" height="200px"
-             ng-src="{{ColorCtrl.folder+'/'+ColorCtrl.selectedGame.character}}"
-             alt="Image"/>
+    <div align="center" class="col-xs-12" data-ng-if="ColorCtrl.isImage">
+      <img data-ng-click="ColorCtrl.playSound()" height="200px"
+           ng-src="{{ColorCtrl.folder+'/'+ColorCtrl.selectedGame.character}}"
+           alt="Image"/>
+    </div>
+    <div align="center" data-ng-if="!ColorCtrl.isImage" data-ng-click="ColorCtrl.playSound()">
+      <div
+        ng-class="ColorCtrl.selectedGame.class"
+        ng-style="{ background : ColorCtrl.selectedGame.class ? ColorCtrl.selectedGame.colorName : ''}"
+        class="col-xs-12"
+        data-ng-if="ColorCtrl.selectedGame.class">
       </div>
-      <div align="center" data-ng-if="!ColorCtrl.isImage" data-ng-click="ColorCtrl.playSound()">
-        <div
-          ng-class="ColorCtrl.selectedGame.class"
-          ng-style="{ background : ColorCtrl.selectedGame.class ? ColorCtrl.selectedGame.colorName : ''}"
-          class="col-xs-12"
-          data-ng-if="ColorCtrl.selectedGame.class">
-        </div>
-        <div data-ng-if="!ColorCtrl.selectedGame.class">
-          <button class="btn btn-default">
-            <span class="glyphicon glyphicon-play-circle"></span>
-            &nbsp;REPLAY
-          </button>
-
-        </div>
-      </div>
-
-      <div class="col-sm-4" data-ng-repeat="game in ColorCtrl.games" style="margin-top:5px">
-        <button class="btn btn-xl" data-ng-click="ColorCtrl.select(game)"
-                style="background-color:{{game.colorName}}; color:white; width:100%; height:100%">
-          <b>
-            {{game.name}}
-          </b>
+      <div data-ng-if="!ColorCtrl.selectedGame.class">
+        <button class="btn btn-default">
+          <span class="glyphicon glyphicon-play-circle"></span>
+          &nbsp;REPLAY
         </button>
+
       </div>
+    </div>
+
+    <button class="btn btn-xl" data-ng-click="ColorCtrl.select(game)" data-ng-repeat="game in ColorCtrl.games"
+            style="margin-top:5px; background-color:{{game.colorName}}; color:white; width:30%; height:auto;">
+      <b>
+        {{game.name}}
+      </b>
+    </button>
   </ion-content>
 </ion-view>
