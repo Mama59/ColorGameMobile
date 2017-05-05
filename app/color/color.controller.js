@@ -5,7 +5,6 @@
   colorController.$inject = ['$stateParams', 'GameService'];
   function colorController($stateParams, GameService) {
     let self = this;
-    console.log('init color');
     self.actual = 0;
 
     self.select = function (color) {
@@ -43,7 +42,6 @@
     self.init = function () {
       self.hardMode = true;
       self.audio = GameService.getAudio();
-      console.log($stateParams);
       self.list = ['viceVersa', 'pawPatrol', 'robocarpoli'];
       self.gameType = $stateParams.gameType || 'colors';
       self.gameFilter = $stateParams.gameFilter || 'pawPatrol';
