@@ -1,12 +1,12 @@
 <ion-view title="Jeux" id="game">
   <ion-content padding="true" class="has-header">
-    <div class="row col-xs-6" data-ng-repeat="game in [{name : 'Listen', link :'nav.color'}, {name : 'Memory', link : 'memory'}]">
+    <div class="row col-xs-6" data-ng-repeat="game in [{name : 'Listen', link :'nav.color'}, {name : 'Memory', link : 'nav.memory'}]">
       <h1 data-ng-bind="game.name"></h1>
       <div data-ng-repeat="(type, category) in GameCtrl.categories">
         <h2 data-ng-bind="type"></h2>
         <h3>
           <div data-ng-repeat="(key, value) in category">
-            <a ui-sref="nav.color({gameFilter : key, gameType : type})">
+            <a ui-sref="{{game.link}}({gameFilter : key, gameType : type})">
               {{key}}
             </a>
           </div>

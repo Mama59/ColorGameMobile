@@ -1,0 +1,23 @@
+<ion-view title="Memory" id="memory">
+  <ion-nav-buttons side="left">
+    <button class="button" ui-sref="nav.game">
+      <i class="ion-arrow-left-a"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+    <div class="col-xs-3" data-ng-repeat="color in MemoryCtrl.memory track by $index">
+      <img data-ng-if="!color.showed" height="150px"
+           ng-src="{{MemoryCtrl.categories[MemoryCtrl.gameType][MemoryCtrl.gameFilter].gameImg}}"
+           alt="Image" data-ng-click="MemoryCtrl.selectMemory($index)"/>
+      <div data-ng-if="color.showed">
+        <img data-ng-if="MemoryCtrl.isImage" height="150px"
+             ng-src="{{MemoryCtrl.folder+color.character}}"
+             alt="Image" data-ng-click="MemoryCtrl.selectMemory($index)"/>
+        <div ng-class="color.class"
+             ng-style="{background : color.colorName}"
+             data-ng-if="!MemoryCtrl.isImage">
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
