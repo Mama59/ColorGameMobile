@@ -2,14 +2,14 @@
   angular
     .module('game')
     .service('GameService', gameService);
-  gameService.$inject = ['$cordovaNativeAudio'];
-  function gameService($cordovaNativeAudio) {
+  gameService.$inject = [];
+  function gameService() {
     let self = this;
     self.audioFile = "/audio/";
 
     function loadSound(name, link)
     {
-      if($cordovaNativeAudio) {
+     /* if($cordovaNativeAudio) {
 
         $cordovaNativeAudio
           .preloadSimple(name, link)
@@ -21,6 +21,7 @@
         self.isSoundLoaded = true;
         playNativeSound('mySound');
       }
+      */
     }
 
     self.playSound = function(name, link)
@@ -36,9 +37,10 @@
     };
 
     function playNativeSound(name){
-      if($cordovaNativeAudio) {
+      /*if($cordovaNativeAudio) {
         $cordovaNativeAudio.play(name);
       }
+     */
     }
 
     self.getAudio = function () {
