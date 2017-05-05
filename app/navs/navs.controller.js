@@ -4,34 +4,10 @@
   angular
     .module('navs')
     .controller('NavsCtrl', navController);
-  navController.$inject = ['AccountService'];
+  navController.$inject = ['GameService'];
 
-  function navController(AccountService) {
+  function navController(GameService) {
     let self = this;
-
-    self.getAccount = function () {
-      if(self.userId) {
-        AccountService.getAccount(self.userId).then(function (result) {
-          self.account = result;
-        });
-      }
-    };
-
-    self.disconnect = function () {
-      console.log('disconnect');
-    };
-
-    function getAccountId() {
-      self.userId = AccountService.getAccountId();
-    }
-
-    function init() {
-      getAccountId();
-
-      self.getAccount();
-      self.today = new Date();
-    }
-
-    init();
+    self.categories = GameService.getCategories();
   }
 })();

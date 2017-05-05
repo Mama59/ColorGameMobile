@@ -2,18 +2,6 @@
   <ion-side-menu-content>
 
     <ion-nav-bar class="bar-royal">
-      <ion-header-bar align-title="left" class="bar-positive">
-        <div class="buttons">
-          <button class="button" ng-click="doSomething()">Left Button</button>
-        </div>
-        <h1 class="title">Title!</h1>
-        <div class="buttons">
-          <button class="button">Right Button</button>
-        </div>
-      </ion-header-bar>
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
@@ -30,28 +18,12 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ui-sref="nav.addAlert">
-          <i class="ion-alert-circled"></i></i> Créer une alerte
+        <ion-item menu-close ui-sref="nav.color">
+          <i class="ion-alert-circled"></i></i> Couleur
         </ion-item>
-        <ion-item menu-close ui-sref="nav.listAlert">
-          <i class="ion-ios-list-outline"></i> Alertes
+        <ion-item menu-close ui-sref="nav.game">
+          <i class="ion-ios-list-outline"></i> Jeux
         </ion-item>
-        <ion-item menu-close ui-sref="nav.listPet({userId: NavsCtrl.account._id})">
-          <i class="ion-social-octocat"></i> Mes Animaux
-        </ion-item>
-        <ion-item menu-close ui-sref="nav.addPet">
-           <i class="ion-ios-paw"></i></i> Ajouter un animal
-        </ion-item>
-
-        <ion-item menu-close ui-sref="nav.account">
-          <i class="ion-person"></i> Profil
-        </ion-item>
-        <ion-item data-ng-click="NavsCtrl.disconnect()">
-          <i class="ion-log-out"></i>
-          Disconnect
-
-        </ion-item>
-
       </ion-list>
     </ion-content>
   </ion-side-menu>
