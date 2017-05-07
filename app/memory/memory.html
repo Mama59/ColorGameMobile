@@ -13,7 +13,6 @@
     </div>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-    {{MemoryCtrl.level}}
     <div class="row" ng-repeat="row in MemoryCtrl.range(MemoryCtrl.memory.length)" ng-if="$index % 3==0">
       <div ng-repeat="line in MemoryCtrl.range('3')">
         <div class="element" data-ng-if="MemoryCtrl.memory.length > (row+line)">

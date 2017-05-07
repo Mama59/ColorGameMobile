@@ -23,8 +23,7 @@
       console.log('init memory ' + self.level);
       self.memory = [];
 
-      var games = angular.copy(self.gamesColor.slice(0, self.level));
-      console.log(games);
+      var games = angular.copy(self.games.slice(0, self.level));
       for (var index in games) {
         if (self.charactersType === 'color') {
           games[index].class = 'circle';
