@@ -19,7 +19,7 @@
     };
 
     self.playSound = function () {
-      GameService.playSound(self.selectedGame);
+      //GameService.playSound(self.selectedGame);
     };
 
     self.selectColor = function () {

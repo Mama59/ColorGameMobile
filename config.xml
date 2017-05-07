@@ -60,4 +60,5 @@
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="~1.2.2" />
     <plugin name="cordova-plugin-nativeaudio" spec="https://github.com/SidneyS/cordova-plugin-nativeaudio.git" />
+    <plugin name="cordova-plugin-media" spec="~3.0.1" />
 </widget>

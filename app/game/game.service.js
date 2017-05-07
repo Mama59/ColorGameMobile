@@ -2,46 +2,43 @@
   angular
     .module('game')
     .service('GameService', gameService);
-  gameService.$inject = [];
-  function gameService() {
+  gameService.$inject = ['$ionicLoading', '$cordovaMedia'];
+  function gameService($ionicLoading, $cordovaMedia) {
+
     let self = this;
     self.audioFile = "/audio/";
 
-    function loadSound(name, link)
-    {
-     /* if($cordovaNativeAudio) {
-
-        $cordovaNativeAudio
-          .preloadSimple(name, link)
-          .then(function (msg) {
-          }, function (error) {
-            alert(error);
-          });
-
-        self.isSoundLoaded = true;
-        playNativeSound('mySound');
+    function getSource() {
+      if (ionic.Platform.isAndroid()) {
+        return '/android_asset/www/' + self.audioFile;
       }
-      */
+      else {
+        return self.audioFile;
+      }
     }
 
-    self.playSound = function(name, link)
-    {
-      if(self.isSoundLoaded)
-      {
-        playNativeSound(name);
-      }
-      else
-      {
-        loadSound(name, link);
+    var mediaStatusCallbackError = function (status) {
+      console.log(status);
+    };
+
+    var mediaStatusCallback = function (status) {
+      if (status == 1) {
+        $ionicLoading.show({template: 'Loading sound ...'});
+      } else {
+        $ionicLoading.hide();
       }
     };
 
-    function playNativeSound(name){
-      /*if($cordovaNativeAudio) {
-        $cordovaNativeAudio.play(name);
-      }
-     */
+    function getSound(filename, src) {
+      //return src;
+      return $cordovaMedia.newMedia(src, null, null, mediaStatusCallback);
     }
+
+    self.playSound = function (object) {
+      if (object && object.audio) {
+        object.audio.play();
+      }
+    };
 
     self.getAudio = function () {
       var audio = {
@@ -51,7 +48,7 @@
 
       for (var file in audio) {
         if (audio[file].fileName) {
-          loadSound(audio[file].fileName, self.audioFile + audio[file].fileName);
+          audio[file].audio = getSound(audio[file].fileName, getSource() + audio[file].fileName);
         }
       }
       return audio;
@@ -71,11 +68,11 @@
         }
 
         if (self.games[type][file].fileName) {
-          self.games[type][file].audio = new Audio(self.audioFile + gamesFile + self.games[type][file].fileName);
+          self.games[type][file].audio = getSound(self.audioFile + gamesFile + self.games[type][file].fileName);
         }
 
         if (self.games[type][file].fileNameEn) {
-          self.games[type][file].audioEn = new Audio(self.audioFile + gamesFile + self.games[type][file].fileNameEn);
+          self.games[type][file].audioEn = getSound(self.audioFile + gamesFile + self.games[type][file].fileName);
         }
         if (self.games[type][file][filter]) {
           self.games[type][file].character = self.games[type][file][params.filter];
@@ -211,86 +208,86 @@
             colorName: 'maroon'
           }
         ],
-        letters :[
+        letters: [
           {
-            name:'B',
-            fileName:'BFr.mp3'
+            name: 'B',
+            fileName: 'BFr.mp3'
           },
           {
-            name:'C',
-            fileName:'CFr.mp3'
+            name: 'C',
+            fileName: 'CFr.mp3'
           },
           {
-            name:'E',
-            fileName:'EFr.mp3'
+            name: 'E',
+            fileName: 'EFr.mp3'
           },
           {
-            name:'F',
-            fileName:'FFr.mp3'
+            name: 'F',
+            fileName: 'FFr.mp3'
           },
           {
-            name:'G',
-            fileName:'GFr.mp3'
+            name: 'G',
+            fileName: 'GFr.mp3'
           },
           {
-            name:'H',
-            fileName:'HFr.mp3'
+            name: 'H',
+            fileName: 'HFr.mp3'
           },
           {
-            name:'J',
-            fileName:'JFr.mp3'
+            name: 'J',
+            fileName: 'JFr.mp3'
           },
           {
-            name:'K',
-            fileName:'KFr.mp3'
+            name: 'K',
+            fileName: 'KFr.mp3'
           },
           {
-            name:'L',
-            fileName:'LFr.mp3'
+            name: 'L',
+            fileName: 'LFr.mp3'
           },
           {
-            name:'M',
-            fileName:'MFr.mp3'
+            name: 'M',
+            fileName: 'MFr.mp3'
           },
           {
-            name:'N',
-            fileName:'NFr.mp3'
+            name: 'N',
+            fileName: 'NFr.mp3'
           },
           {
-            name:'O',
-            fileName:'OFr.mp3'
+            name: 'O',
+            fileName: 'OFr.mp3'
           },
           {
-            name:'P',
-            fileName:'PFr.mp3'
+            name: 'P',
+            fileName: 'PFr.mp3'
           },
           {
-            name:'R',
-            fileName:'RFr.mp3'
+            name: 'R',
+            fileName: 'RFr.mp3'
           },
           {
-            name:'S',
-            fileName:'SFr.mp3'
+            name: 'S',
+            fileName: 'SFr.mp3'
           },
           {
-            name:'T',
-            fileName:'TFr.mp3'
+            name: 'T',
+            fileName: 'TFr.mp3'
           },
           {
-            name:'V',
-            fileName:'VFr.mp3'
+            name: 'V',
+            fileName: 'VFr.mp3'
           },
           {
-            name:'W',
-            fileName:'WFr.mp3'
+            name: 'W',
+            fileName: 'WFr.mp3'
           },
           {
-            name:'Y',
-            fileName:'YFr.mp3'
+            name: 'Y',
+            fileName: 'YFr.mp3'
           },
           {
-            name:'Z',
-            fileName:'ZFr.mp3'
+            name: 'Z',
+            fileName: 'ZFr.mp3'
           }
         ],
 
@@ -387,14 +384,14 @@
           color: {key: 'name', gameImg: self.imageFolder + 'question.jpg'},
           colorEn: {key: 'nameEn'}
         },
-        numbers : {
-          numbers : {key : 'fileName'}
+        numbers: {
+          numbers: {key: 'fileName'}
         },
-        days:{
-          day : {key : 'fileName'}
+        days: {
+          day: {key: 'fileName'}
         },
-        letters:{
-          letter : {key : 'fileName'}
+        letters: {
+          letter: {key: 'fileName'}
         }
       };
     }
