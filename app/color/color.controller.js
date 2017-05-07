@@ -58,22 +58,25 @@
     };
 
     self.initColor = function () {
-      self.games = angular.copy(self.gamesColor.slice(0, self.level));
+      if (!self.gamesColor) {
+        self.gamesColor = GameService.getGames({filter: self.gameFilter, type: self.gameType});
+      }
+      self.games = self.gamesColor;
+      self.selectColor();
+
     };
 
     self.init = function () {
-      self.easyinit = function () {
-        self.audio = GameService.getAudio();
-        self.list = ['viceVersa', 'pawPatrol', 'robocarpoli'];
-        console.log($stateParams.gameType, $stateParams.gameFilter);
-        self.gameType = $stateParams.gameType || 'colors';
-        self.gameFilter = $stateParams.gameFilter || 'pawPatrol';
-        self.folder = 'images/' + self.gameFilter;
-        self.gamesColor = GameService.getGames({filter: self.gameFilter, type: self.gameType});
-        self.selectColor();
-        self.isImage = self.isImg();
-      };
-      self.init();
-    }
+      self.audio = GameService.getAudio();
+      self.list = ['viceVersa', 'pawPatrol', 'robocarpoli'];
+      self.gameType = $stateParams.gameType || 'colors';
+      self.gameFilter = $stateParams.gameFilter || 'pawPatrol';
+      self.folder = 'images/' + self.gameFilter;
+      self.isImage = self.isImg();
+      self.initColor();
+      self.level = 5;
+    };
+
+    self.init();
   }
 })();

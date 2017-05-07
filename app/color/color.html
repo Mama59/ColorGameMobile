@@ -4,14 +4,6 @@
       <i class="ion-arrow-left-a"></i>
     </button>
   </ion-nav-buttons>
-  <ion-nav-buttons side="right">
-    <div class="item range range-calm item-royal">
-      <i class="icon ion-minus-circled"></i>
-      <input type="range" name="level" min="1" max="{{ColorCtrl.games.length}}"
-             ng-change="ColorCtrl.initColor()" ng-model="ColorCtrl.level">
-      <i class="icon ion-plus-circled"></i>
-    </div>
-  </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <div align="center" class="col-xs-12" data-ng-if="ColorCtrl.isImage">
       <img data-ng-click="ColorCtrl.playSound()" height="200px"
