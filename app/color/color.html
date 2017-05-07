@@ -4,6 +4,14 @@
       <i class="ion-arrow-left-a"></i>
     </button>
   </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <div class="item range range-calm item-royal">
+      <i class="icon ion-minus-circled"></i>
+      <input type="range" name="level" min="1" max="{{ColorCtrl.games.length}}"
+             ng-change="ColorCtrl.initColor()" ng-model="ColorCtrl.level">
+      <i class="icon ion-plus-circled"></i>
+    </div>
+  </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <div align="center" class="col-xs-12" data-ng-if="ColorCtrl.isImage">
       <img data-ng-click="ColorCtrl.playSound()" height="200px"
@@ -13,21 +21,29 @@
     <div align="center" data-ng-if="!ColorCtrl.isImage" data-ng-click="ColorCtrl.playSound()">
       <div
         ng-class="ColorCtrl.selectedGame.class"
-        ng-style="{ background : ColorCtrl.selectedGame.class ? ColorCtrl.selectedGame.colorName : ''}"
+        ng-style="{ background : ColorCtrl.selectedGame.class ? ColorCtrl.selectedGame.colorName : '',
+         color : 'black'}"
         class="col-xs-12"
         data-ng-if="ColorCtrl.selectedGame.class">
       </div>
+      <div data-ng-if="!ColorCtrl.selectedGame.colorName">
+        <button class="button button-large" style="margin-top:5px; width:30%; height:50px">
+          <b>
+            {{ColorCtrl.selectedGame.name}}
+          </b>
+        </button>
+      </div>
       <div data-ng-if="!ColorCtrl.selectedGame.class">
-        <button class="btn btn-default">
+        <button class="button button-light">
           <span class="glyphicon glyphicon-play-circle"></span>
           &nbsp;REPLAY
         </button>
-
       </div>
     </div>
 
-    <button class="btn btn-xl" data-ng-click="ColorCtrl.select(game)" data-ng-repeat="game in ColorCtrl.games"
-            style="margin-top:5px; background-color:{{game.colorName}}; color:white; width:30%; height:50px">
+    <button class="button button-large" data-ng-click="ColorCtrl.select(game)" data-ng-repeat="game in ColorCtrl.games"
+            style="margin-top:5px; background-color:{{game.colorName}}; width:30%; height:50px"
+            ng-style="{color : game.darkColor ?  'white': 'black', backgroundColor : game.colorName ? game.colorName: 'white'}">
       <b>
         {{game.name}}
       </b>

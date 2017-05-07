@@ -21,3 +21,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "app/lib/ionic/scss/ionic";
 @import "app/navs/navs";
+
+.circle {
+  width: 80%;
+  height: 150px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  border-bottom: 20px;
+  border: 2px solid;
+  border-color : saddlebrown;
+}

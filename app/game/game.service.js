@@ -2,8 +2,8 @@
   angular
     .module('game')
     .service('GameService', gameService);
-  gameService.$inject = ['$ionicLoading', '$cordovaMedia'];
-  function gameService($ionicLoading, $cordovaMedia) {
+  gameService.$inject = ['$ionicLoading'];
+  function gameService($ionicLoading) {
 
     let self = this;
     self.audioFile = "/audio/";
@@ -30,9 +30,14 @@
     };
 
     function getSound(filename, src) {
+      return new Audio(src);
       //return src;
-      return $cordovaMedia.newMedia(src, null, null, mediaStatusCallback);
+      //   return $cordovaMedia.newMedia(src, null, null, mediaStatusCallback);
     }
+
+    self.play = function(object){
+      return self.playSound(object);
+    };
 
     self.playSound = function (object) {
       if (object && object.audio) {
@@ -108,13 +113,14 @@
     };
 
     self.randomElement = function (opts) {
-      var array = opts.array;
-      var random;
-      do {
-        random = randomElement(array);
-      } while (random === opts.actual);
+        console.log('timeout');
+        var array = opts.array;
+        var random;
+        do {
+          random = randomElement(array);
+        } while (random === opts.actual);
 
-      return random;
+        return random;
     };
 
     function init() {
@@ -131,7 +137,8 @@
             fileNameEn: 'red.mp3',
             pawPatrol: 'marcus.jpeg',
             robocarpoli: 'roy.jpg',
-            viceVersa: 'colere.jpeg'
+            viceVersa: 'colere.jpeg',
+            darkColor: true
           },
           {
             name: 'bleu',
@@ -141,7 +148,8 @@
             fileNameEn: 'blue.mp3',
             pawPatrol: 'chase.jpeg',
             robocarpoli: 'poli.jpg',
-            viceVersa: 'tristess.jpeg'
+            viceVersa: 'tristess.jpeg',
+            darkColor: true
           },
           {
             name: 'jaune',
@@ -150,7 +158,8 @@
             fileName: 'jaune.mp3',
             fileNameEn: 'yellow.mp3',
             pawPatrol: 'ruben.jpeg',
-            viceVersa: 'joie.jpeg'
+            viceVersa: 'joie.jpeg',
+            darkColor: false
           },
           {
             name: 'vert',
@@ -160,7 +169,8 @@
             fileNameEn: 'green.mp3',
             pawPatrol: 'rocky.jpeg',
             robocarpoli: 'heli.jpg',
-            viceVersa: 'degout.jpeg'
+            viceVersa: 'degout.jpeg',
+            darkColor: true
           },
           {
             name: 'blanc',
@@ -168,14 +178,16 @@
             colorName: 'white',
             fileName: 'grisFr.mp3',
             fileNameEn: 'grey.mp3',
-            pawPatrol: 'everest.jpg'
+            pawPatrol: 'everest.jpg',
+            darkColor: false
           },
           {
             name: 'noir',
             nameEn: 'black',
             colorName: 'black',
             fileName: 'noir.mp3',
-            fileNameEn: 'black.mp3'
+            fileNameEn: 'black.mp3',
+            darkColor: true
           },
           {
             name: 'violet',
@@ -183,7 +195,8 @@
             colorName: 'purple',
             fileName: 'violet.mp3',
             fileNameEn: 'violetEn.mp3',
-            viceVersa: 'peur.jpeg'
+            viceVersa: 'peur.jpeg',
+            darkColor: true
           },
           {
             name: 'orange',
@@ -191,21 +204,24 @@
             colorName: 'orange',
             fileName: 'orangeFr.mp3',
             fileNameEn: 'orangeEn.mp3',
-            pawPatrol: 'zuma.jpeg'
+            pawPatrol: 'zuma.jpeg',
+            darkColor: true
           },
           {
             name: 'rose',
             nameEn: 'pink',
-            colorName: 'pink',
+            colorName: 'deeppink',
             fileName: 'roseFr.mp3',
             fileNameEn: 'pink.mp3',
             pawPatrol: 'stella.jpeg',
-            robocarpoli: 'ambre.jpg'
+            robocarpoli: 'ambre.jpg',
+            darkColor: false
           },
           {
             name: 'marron',
             nameEn: 'brown',
-            colorName: 'maroon'
+            colorName: 'saddlebrown',
+            darkColor: true
           }
         ],
         letters: [

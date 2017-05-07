@@ -4,7 +4,16 @@
       <i class="ion-arrow-left-a"></i>
     </button>
   </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <div class="item range range-calm item-royal">
+      <i class="icon ion-minus-circled"></i>
+      <input type="range" name="level" min="1" max="{{MemoryCtrl.games.length}}"
+             ng-change="MemoryCtrl.initMemory()" ng-model="MemoryCtrl.level">
+      <i class="icon ion-plus-circled"></i>
+    </div>
+  </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
+    {{MemoryCtrl.level}}
     <div class="row" ng-repeat="row in MemoryCtrl.range(MemoryCtrl.memory.length)" ng-if="$index % 3==0">
       <div ng-repeat="line in MemoryCtrl.range('3')">
         <div class="element" data-ng-if="MemoryCtrl.memory.length > (row+line)">

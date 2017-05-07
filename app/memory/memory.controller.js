@@ -4,22 +4,40 @@
     .controller('MemoryCtrl', memoryController);
   memoryController.$inject = ['$stateParams', 'GameService'];
   function memoryController($stateParams, GameService) {
+
     let self = this;
+
+    self.updateLevel = function (increment) {
+      self.level += increment;
+      if (self.level < 1) {
+        self.level = 1;
+      }
+      if (self.level > self.games.length) {
+        self.level = self.games.length;
+      }
+      console.log('update level' + increment);
+      self.initMemory();
+    };
+
     self.initMemory = function () {
+      console.log('init memory ' + self.level);
       self.memory = [];
-      for (var index in self.games) {
+
+      var games = angular.copy(self.gamesColor.slice(0, self.level));
+      console.log(games);
+      for (var index in games) {
         if (self.charactersType === 'color') {
-          self.games[index].class = 'circle';
+          games[index].class = 'circle';
         }
         else {
-          self.games[index].class = "";
+          games[index].class = "";
         }
 
-        var color = angular.copy(self.games[index]);
-        var color2 = angular.copy(self.games[index]);
+        var color = angular.copy(games[index]);
+        var color2 = angular.copy(games[index]);
         color.id = index;
         color.showed = false;
-        color2.id = index + self.games.length;
+        color2.id = index + games.length;
         color2.showed = false;
 
         self.memory.push(color, color2);
@@ -57,7 +75,11 @@
       }
     };
 
-    self.range = function(count){
+    self.updateLevel = function () {
+
+    };
+
+    self.range = function (count) {
       var ratings = [];
       for (var i = 0; i < count; i++) {
         ratings.push(i)
@@ -75,6 +97,7 @@
       self.folder = 'images/' + self.gameFilter + '/';
       self.games = GameService.getGames({filter: self.gameFilter, type: self.gameType});
       self.categories = GameService.getCategories();
+      self.level = self.games.length / 2;
       self.initMemory();
       self.isImage = self.isImg();
     }

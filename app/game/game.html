@@ -1,17 +1,24 @@
 <ion-view title="Jeux" id="game">
   <ion-content padding="true" class="has-header">
-    <div class="element" data-ng-repeat="game in [{name : 'Listen', link :'nav.color'}, {name : 'Memory', link : 'nav.memory'}]">
+    <div data-ng-repeat="game in [{name : 'Listen', link :'nav.color'},
+    {name : 'Memory', link : 'nav.memory'}]">
       <h1 data-ng-bind="game.name"></h1>
-      <div data-ng-repeat="(type, category) in GameCtrl.categories" class="element">
-        <h2 data-ng-bind="type"></h2>
-        <h3>
-          <div data-ng-repeat="(key, value) in category" class="element">
-            <a ui-sref="{{game.link}}({gameFilter : key, gameType : type})">
-              {{key}}
-            </a>
+      <div data-ng-repeat="(type, category) in GameCtrl.categories">
+        <div class="row" ng-repeat="row in GameCtrl.range(GameCtrl.categoriesArray[type].length)"
+             ng-if="$index % 3==0">
+          <div class="button-bar">
+          <div ng-repeat="line in GameCtrl.range('3')" class="col col-33">
+            <div class="element" data-ng-if="GameCtrl.categoriesArray[type].length > (row+line)">
+              <button class="button button-calm col-100"
+                      ui-sref="{{game.link}}({gameFilter :'{{GameCtrl.categoriesArray[type][row+line]}}', gameType : '{{type}}' })"
+              data-ng-bind="GameCtrl.categoriesArray[type][row+line]">
+              </button>
+            </div>
+            </div>
           </div>
-        </h3>
+        </div>
       </div>
     </div>
+
   </ion-content>
 </ion-view>
