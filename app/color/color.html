@@ -19,22 +19,22 @@
         data-ng-if="ColorCtrl.selectedGame.class">
       </div>
       <div data-ng-if="!ColorCtrl.selectedGame.colorName">
-        <button class="button button-large" style="margin-top:5px; width:30%; height:50px">
+        <button class="button button-royal button-outline " style="margin-top:5px; width:33%; height:50px">
           <b>
             {{ColorCtrl.selectedGame.name}}
           </b>
         </button>
       </div>
       <div data-ng-if="!ColorCtrl.selectedGame.class">
-        <button class="button button-light">
+        <button class="button button-light padding">
           <span class="glyphicon glyphicon-play-circle"></span>
           &nbsp;REPLAY
         </button>
       </div>
     </div>
 
-    <button class="button button-large" data-ng-click="ColorCtrl.select(game)" data-ng-repeat="game in ColorCtrl.games"
-            style="margin-top:5px; background-color:{{game.colorName}}; width:30%; height:50px"
+    <button class="button button-royal button-outline" data-ng-click="ColorCtrl.select(game)" data-ng-repeat="game in ColorCtrl.games"
+            style="margin-top:5px; background-color:{{game.colorName}}; width:33%; height:50px"
             ng-style="{color : game.darkColor ?  'white': 'black', backgroundColor : game.colorName ? game.colorName: 'white'}">
       <b>
         {{game.name}}

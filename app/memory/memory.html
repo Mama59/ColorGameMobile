@@ -14,26 +14,29 @@
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <div class="row" ng-repeat="row in MemoryCtrl.range(MemoryCtrl.memory.length)" ng-if="$index % 3==0">
-      <div ng-repeat="line in MemoryCtrl.range('3')">
-        <div class="element" data-ng-if="MemoryCtrl.memory.length > (row+line)">
-          <img data-ng-if="!MemoryCtrl.memory[row+line].showed"
-               class="image-list-thumb" width="100%" height="auto"
-               ng-src="{{MemoryCtrl.categories[MemoryCtrl.gameType][MemoryCtrl.gameFilter].gameImg}}"
-               alt="Image" data-ng-click="MemoryCtrl.selectMemory(row+line)"/>
-          <div data-ng-if="MemoryCtrl.memory[row+line].showed">
-            <img data-ng-if="MemoryCtrl.isImage"
+      <div class="button-bar">
+        <div ng-repeat="line in MemoryCtrl.range('3')" class="col col-33">
+
+          <div class="element" data-ng-if="MemoryCtrl.memory.length > (row+line)">
+            <img data-ng-if="!MemoryCtrl.memory[row+line].showed"
                  class="image-list-thumb" width="100%" height="auto"
-                 ng-src="{{MemoryCtrl.folder+MemoryCtrl.memory[row+line].character}}"
-                 alt="Image"/>
-            <div ng-class="MemoryCtrl.memory[row+line].class"
-                 ng-style="{background : MemoryCtrl.memory[row+line].colorName}"
-                 data-ng-if="!MemoryCtrl.isImage">
+                 ng-src="{{MemoryCtrl.categories[MemoryCtrl.gameType][MemoryCtrl.gameFilter].gameImg || MemoryCtrl.img}}"
+                 alt="Image" data-ng-click="MemoryCtrl.selectMemory(row+line)"/>
+            <div data-ng-if="MemoryCtrl.memory[row+line].showed">
+              <img data-ng-if="MemoryCtrl.isImage"
+                   class="image-list-thumb" width="100%" height="auto"
+                   ng-src="{{MemoryCtrl.folder+MemoryCtrl.memory[row+line].character}}"
+                   alt="Image"/>
+              <div
+                ng-class="MemoryCtrl.memory[row+line].class || 'button button-royal button-outline text-center'"
+                ng-style="{background : MemoryCtrl.memory[row+line].colorName}"
+                style="width:100%"
+                data-ng-if="!MemoryCtrl.isImage" data-ng-bind="MemoryCtrl.memory[row+line].name">
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
-
   </ion-content>
 </ion-view>

@@ -49,14 +49,6 @@
       return ratings;
     };
 
-    self.isImg = function () {
-      return !(self.gameFilter === 'colorEn'
-      || self.gameFilter === 'color'
-      || self.gameFilter === 'sound'
-      || self.gameFilter === 'soundEn'
-      || self.gameType !== 'colors');
-    };
-
     self.initColor = function () {
       if (!self.gamesColor) {
         self.gamesColor = GameService.getGames({filter: self.gameFilter, type: self.gameType});
@@ -72,7 +64,7 @@
       self.gameType = $stateParams.gameType || 'colors';
       self.gameFilter = $stateParams.gameFilter || 'pawPatrol';
       self.folder = 'images/' + self.gameFilter;
-      self.isImage = self.isImg();
+      self.isImage = GameService.isImg(self.gameFilter, self.gameType);
       self.initColor();
       self.level = 5;
     };

@@ -7,6 +7,7 @@
 
     let self = this;
 
+    self.img = 'images/question.jpg';
     self.updateLevel = function (increment) {
       self.level += increment;
       if (self.level < 1) {
@@ -15,12 +16,10 @@
       if (self.level > self.games.length) {
         self.level = self.games.length;
       }
-      console.log('update level' + increment);
       self.initMemory();
     };
 
     self.initMemory = function () {
-      console.log('init memory ' + self.level);
       self.memory = [];
 
       var games = angular.copy(self.games.slice(0, self.level));
@@ -61,8 +60,7 @@
         if (self.memorySelected) {
           self.memoryTest = self.memory[index];
           self.memoryTest.showed = true;
-          if (self.memorySelected.colorName === self.memoryTest.colorName) {
-            console.log('ok');
+          if (self.memorySelected.name === self.memoryTest.name) {
             self.memoryTest = null;
             self.memorySelected = null;
           }
@@ -74,20 +72,12 @@
       }
     };
 
-    self.updateLevel = function () {
-
-    };
-
     self.range = function (count) {
       var ratings = [];
       for (var i = 0; i < count; i++) {
         ratings.push(i)
       }
       return ratings;
-    };
-
-    self.isImg = function () {
-      return !(self.gameFilter === 'color' || self.gameFilter === 'sound');
     };
 
     function init() {
@@ -98,7 +88,7 @@
       self.categories = GameService.getCategories();
       self.level = self.games.length / 2;
       self.initMemory();
-      self.isImage = self.isImg();
+      self.isImage = GameService.isImg(self.gameFilter, self.gameType);
     }
 
     init();

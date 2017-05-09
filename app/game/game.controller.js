@@ -9,7 +9,11 @@
       self.categories = GameService.getCategories();
       self.categoriesArray = {};
       for(var category in self.categories){
-        self.categoriesArray[category] = Object.keys(self.categories[category]);
+        var subCategories = [];
+        for(var subCategory in self.categories[category]){
+          subCategories.push({french : self.categories[category][subCategory].french, name : subCategory });
+        }
+        self.categoriesArray[category] = subCategories;
       }
     }
 

@@ -2,14 +2,17 @@
   angular
     .module('game')
     .service('GameService', gameService);
-  gameService.$inject = ['$ionicLoading'];
-  function gameService($ionicLoading) {
+  gameService.$inject = ['$ionicLoading', '$ionicPlatform'];
+  function gameService($ionicLoading, $ionicPlatform) {
 
     let self = this;
     self.audioFile = "/audio/";
+    var isIOS = ionic.Platform.isIOS();
+    var isAndroid = ionic.Platform.isAndroid();
+    var isWebView = ionic.Platform.isWebView();
 
     function getSource() {
-      if (ionic.Platform.isAndroid()) {
+      if (isAndroid) {
         return '/android_asset/www/' + self.audioFile;
       }
       else {
@@ -17,8 +20,15 @@
       }
     }
 
-    var mediaStatusCallbackError = function (status) {
-      console.log(status);
+    self.isImg = function (gameFilter, gameType) {
+      if (gameType !== 'colors') {
+        return false;
+      }
+
+      return !(gameFilter === 'colorEn'
+      || gameFilter === 'color'
+      || gameFilter === 'sound'
+      || gameFilter === 'soundEn');
     };
 
     var mediaStatusCallback = function (status) {
@@ -31,11 +41,9 @@
 
     function getSound(filename, src) {
       return new Audio(src);
-      //return src;
-      //   return $cordovaMedia.newMedia(src, null, null, mediaStatusCallback);
     }
 
-    self.play = function(object){
+    self.play = function (object) {
       return self.playSound(object);
     };
 
@@ -113,14 +121,13 @@
     };
 
     self.randomElement = function (opts) {
-        console.log('timeout');
-        var array = opts.array;
-        var random;
-        do {
-          random = randomElement(array);
-        } while (random === opts.actual);
+      var array = opts.array;
+      var random;
+      do {
+        random = randomElement(array);
+      } while (random === opts.actual);
 
-        return random;
+      return random;
     };
 
     function init() {
@@ -388,30 +395,32 @@
 
       self.categories = {
         colors: {
-          sound: {key: "fileName"},
-          soundEn: {key: "fileNameEn"},
-          pawPatrol: {key: "pawPatrol", gameImg: self.imageFolder + 'pawPatrol/game.png'},
+          sound: {key: "fileName", icon: "ion-volume-high", french: "Son"},
+          soundEn: {key: "fileNameEn", icon: "ion-volume-high", french: "Son anglais"},
+          pawPatrol: {key: "pawPatrol", gameImg: self.imageFolder + 'pawPatrol/game.png', french: 'Pat patrouille'},
+          viceVersa: {key: "viceVersa", gameImg: self.imageFolder + 'viceVersa/game.jpg', french: 'Vice Versa'},
+          color: {key: 'name', gameImg: self.imageFolder + 'question.jpg', french: 'Couleur'},
+          colorEn: {key: 'nameEn', french: 'Couleur anglais'},
           robocarpoli: {
             key: "robocarpoli",
             gameImg: self.imageFolder + 'robocarpoli/game.jpg',
-            type: 'colors'
+            type: 'colors',
+            french: 'Robocarpoli'
           },
-          viceVersa: {key: "viceVersa", gameImg: self.imageFolder + 'viceVersa/game.jpg'},
-          color: {key: 'name', gameImg: self.imageFolder + 'question.jpg'},
-          colorEn: {key: 'nameEn'}
         },
         numbers: {
-          numbers: {key: 'fileName'}
+          numbers: {key: 'fileName', french: 'Nombre'}
         },
         days: {
-          day: {key: 'fileName'}
+          day: {key: 'fileName', french: 'Jour'}
         },
         letters: {
-          letter: {key: 'fileName'}
+          letter: {key: 'fileName', french: 'Lettre'}
         }
       };
     }
 
     init();
   }
-})();
+})
+();
