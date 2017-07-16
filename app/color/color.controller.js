@@ -6,15 +6,19 @@
   function colorController($stateParams, GameService, $timeout) {
     let self = this;
     self.actual = 0;
+    self.found = false;
 
     self.select = function (color) {
-
-      if (color === self.selectedGame) {
-        self.selectColor();
-      }
-      else {
-        GameService.play(self.audio.bad);
-        console.log('Raté');
+      if(! self.found) {
+        console.log('Color', color, self.selectedGame);
+        self.found = (color === self.selectedGame);
+        if (self.found) {
+          self.selectColor();
+        }
+        else {
+          GameService.play(self.audio.bad);
+          console.log('Raté');
+        }
       }
     };
 
@@ -25,7 +29,6 @@
     self.selectColor = function () {
       $timeout(function () {
         self.selectedGame = GameService.randomElement({array: self.games, actual: self.selectedGame});
-
         if (!self.level > 3) {
           self.games = GameService.shuffle(self.games);
         }
@@ -36,6 +39,7 @@
         else {
           self.selectedGame.class = "";
         }
+        self.found = false;
         self.playSound();
       }, 400);
 
